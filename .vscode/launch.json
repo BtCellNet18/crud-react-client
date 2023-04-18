@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:3080",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "SWA: Run crud-react-client",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:4280",
+            "preLaunchTask": "swa: start crud-react-client",
+            "webRoot": "${workspaceFolder}/",
+            "timeout": 30000
+        }
+    ]
+}
