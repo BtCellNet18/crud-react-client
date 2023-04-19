@@ -16,10 +16,12 @@ export const Home = () => {
                 </div>
             </div>
             <div className="row">
-                <div className="col text-center">
-                    <p>
-                        A sample React client that consumes a web API.
-                    </p>
+                <div className="col text-center">                
+                    A sample React client that consumes a web&nbsp;
+                    <a href="https://webapi20200129025509.azurewebsites.net">
+                        API
+                    </a>
+                    .
                 </div>
             </div>
         </div>
