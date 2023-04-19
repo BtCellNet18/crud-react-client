@@ -1,10 +1,12 @@
+import logo from '../GitHub.png';
+
 export const Home = () => {
     return (
         <div className="container">
             <div className="row">
                 <div className="col text-center">
                     <a href="https://github.com/BtCellNet18/crud-react-client">
-                        <img src="/GitHub.png" alt="GitHub" title="GitHub" height="32" width="32" />
+                        <img src={logo} alt="GitHub" title="GitHub" height="32" width="32" />
                     </a>
                 </div>
             </div>
