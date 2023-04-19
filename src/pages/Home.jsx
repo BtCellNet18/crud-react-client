@@ -1,4 +1,4 @@
-import logo from '../GitHub.png';
+import logo from '../images/GitHub.png';
 
 export const Home = () => {
     return (

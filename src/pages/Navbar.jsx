@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { AuthService } from "../services";
+import logo from '../images/React.png';
 
 export const Navbar = (props) => {
     // Events
@@ -11,7 +12,9 @@ export const Navbar = (props) => {
     return (
         <nav className="navbar navbar-expand navbar-dark bg-dark">
             <div className="container">
-                <a className="navbar-brand" href="https://react.dev/">React</a>
+                <a className="navbar-brand" href="https://react.dev/">
+                    <img src={logo} alt="React" title="React" height="32" width="32" />
+                </a>
 
                 <div className="navbar-nav">
                     <li className="nav-item">
