@@ -1,4 +1,4 @@
-export const httpService = {
+export const HttpService = {
     get,
     post,
     put,
@@ -52,7 +52,6 @@ function handleResponse(response) {
         if (!response.ok && response.status === 401) {
             console.log(response);
             localStorage.removeItem('token');
-            window.location = '/login';
         }
 
         return data;

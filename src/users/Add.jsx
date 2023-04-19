@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { authService } from '../services/auth.service';
-import { userService } from '../services/user.service';
+import { Link, Navigate } from 'react-router-dom';
+import { AuthService, UserService } from '../services';
 
-const AddUser = () => {
+export const AddUser = () => {
     // State
     const initialValues = {
         username: '',
@@ -12,13 +11,16 @@ const AddUser = () => {
         lastName: '',
         email: ''
     };
-
-    const navigate = useNavigate();
     const [user, setUser] = useState(initialValues);
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [cancelUrl, setCancelUrl] = useState('/');
+    const [createlUrl, setCreateUrl] = useState('/login');
     // Effects
     useEffect(() => {
-        setLoggedIn(authService.isLoggedIn());
+        if (AuthService.isLoggedIn()) {
+            setCancelUrl('/users');
+            setCreateUrl('/users');
+        }
     }, []);
     // Handlers
     const handleChange = e => {
@@ -28,22 +30,17 @@ const AddUser = () => {
         });
     };
 
-    const handleCancel = () => {
-        let url = loggedIn ? '/users' : '/';
-        navigate(url);
-    }
-
     const handleCreate = () => {
         // TODO use form validation for required fields
         if (user.username && user.password && user.firstName && user.lastName && user.email) {
-            userService.create(user)
-                .then(() => {
-                    let url = loggedIn ? '/users' : '/login';
-                    navigate(url);
-                });
+            UserService.create(user).then(setSuccess(true));
         }
     }
     // Template
+    if (success) { 
+        return <Navigate to={createlUrl} />
+    }
+    
     return (
         <div className="container">
             <div className="panel panel-primary">
@@ -102,7 +99,7 @@ const AddUser = () => {
                         />
                     </div>
                     <div className="mt-3">
-                        <button className="btn btn-light" onClick={handleCancel}>Cancel</button>
+                        <Link className="btn btn-light" to={cancelUrl}>Cancel</Link>
                         <button className="btn btn-success" onClick={handleCreate}>Create</button>
                     </div>
                 </div>
@@ -110,4 +107,3 @@ const AddUser = () => {
         </div>
     );
 }
-export default AddUser;

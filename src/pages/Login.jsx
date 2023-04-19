@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { authService } from '../services/auth.service';
+import { Link, Navigate } from 'react-router-dom';
+import { AuthService } from '../services';
 
-const Login = () => {
+export const Login = (props) => {
     // State
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -15,12 +16,14 @@ const Login = () => {
             if (username && password) {
                 setError(null);
                 setIsLoading(true);
-                let data = await authService.login({ username, password });
+                let data = await AuthService.login({ username, password });
                 setIsLoading(false);
                 if (data.token) {
                     localStorage.setItem('token', data.token);
-                    window.location = '/users';
+                    props.setLoginResult(true);
+                    setSuccess(true);
                 } else {
+                    props.setLoginResult(false);
                     setError('Invalid username or password!');
                 }
             }
@@ -29,6 +32,10 @@ const Login = () => {
         }
     }
     // Template
+    if (success) {
+        return <Navigate to="/users" />
+    } 
+
     return (
         <div className="container">
             <div className="panel panel-primary">
@@ -75,4 +82,3 @@ const Login = () => {
         </div>
     );
 }
-export default Login;

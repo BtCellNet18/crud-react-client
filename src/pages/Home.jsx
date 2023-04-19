@@ -1,9 +1,9 @@
-const Home = () => {
+export const Home = () => {
     return (
         <div className="container">
             <div className="row">
                 <div className="col text-center">
-                    <a href="https://github.com/BtCellNet18/CRUD-React-Client">
+                    <a href="https://github.com/BtCellNet18/crud-react-client">
                         <img src="/GitHub.png" alt="GitHub" title="GitHub" height="32" width="32" />
                     </a>
                 </div>
@@ -23,5 +23,3 @@ const Home = () => {
         </div>
     );
 }
-
-export default Home;

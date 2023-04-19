@@ -1,10 +1,9 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Navigate, Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { userService } from '../services/user.service';
+import { UserService } from '../services';
 
-const EditUser = () => {
+export const EditUser = () => {
     const { id } = useParams();
-    const navigate = useNavigate();
     // State
     const initialValues = {
         id: id,
@@ -14,10 +13,10 @@ const EditUser = () => {
     };
 
     const [user, setUser] = useState(initialValues);
+    const [success, setSuccess] = useState(false);
     // Effects
     useEffect(() => {
-        userService.getById(id)
-            .then(user => setUser(user));
+        UserService.getById(id).then(user => setUser(user));
     }, [id]);
     // Events
     const handleChange = e => {
@@ -30,14 +29,14 @@ const EditUser = () => {
     const handleUpdate = () => {
         // TODO use form validation for required fields
         if (user.firstName && user.lastName && user.email) {
-            console.log(user);
-
-            userService.update(id, user)
-                .then(() => {
-                    navigate('/users');
-                });
+            UserService.update(id, user).then(setSuccess(true));
         }
     }
+
+    if (success) { 
+        return <Navigate to="/users" />
+    }
+
     // Template
     return (
         <div className="container">
@@ -85,4 +84,3 @@ const EditUser = () => {
         </div>
     );
 }
-export default EditUser;

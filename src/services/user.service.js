@@ -1,9 +1,9 @@
 import config from '../config.json';
-import { httpService } from './http.service';
+import { HttpService } from './http.service';
 
 const url = config.API_URL + 'Users';
 
-export const userService = {
+export const UserService = {
     getAll,
     getById,
     create,
@@ -12,21 +12,21 @@ export const userService = {
 };
 
 function getAll() {
-    return httpService.get(url);
+    return HttpService.get(url);
 }
 
 function getById(id) {
-    return httpService.get(`${url}/${id}`);
+    return HttpService.get(`${url}/${id}`);
 }
 
 function create(params) {
-    return httpService.post(url, params);
+    return HttpService.post(url, params);
 }
 
 function update(id, params) {
-    return httpService.put(`${url}/${id}`, params);
+    return HttpService.put(`${url}/${id}`, params);
 }
 
 function _delete(id) {
-    return httpService.delete(`${url}/${id}`);
+    return HttpService.delete(`${url}/${id}`);
 }

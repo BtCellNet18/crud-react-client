@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { userService } from '../services/user.service';
+import { UserService } from '../services';
 
-const ListUsers = () => {
+export const ListUsers = () => {
     // State
     const [users, setUsers] = useState(null);
     // Effects
     useEffect(() => {
-        userService.getAll().then(x => setUsers(x));
-    }, []);
+        UserService.getAll().then(x => setUsers(x));
+    }, [users]);
     // Events
     const handleDelete = (user) => {
         if (window.confirm(`Delete user ${user.id} Are you sure?`)) {
-            userService.delete(user.id).then(() => { 
-                userService.getAll().then(x => setUsers(x));
-            });   
+            UserService.delete(user.id).then(() => {
+                UserService.getAll().then(x => setUsers(x));
+            });
         }
-    }  
+    }
     // Template
     return (
         <div className="container">
@@ -27,7 +27,7 @@ const ListUsers = () => {
                             <h3>List Users</h3>
                         </div>
                         <div className="col-md-2">
-                            <a className="btn btn-success" href="/users/add">Add</a>                            
+                            <Link className="btn btn-success" to="/users/add">Add</Link>
                         </div>
                     </div>
                 </div>
@@ -45,16 +45,16 @@ const ListUsers = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                            {users && users.map(user => 
-                                <tr key={user.id}>
-                                    <td>{user.id}</td>
-                                    <td>{user.firstName}</td>
-                                    <td>{user.lastName}</td>
-                                    <td>{user.username}</td>
-                                    <td><Link className="btn btn-primary" to={`/users/edit/${user.id}`}>Edit</Link></td>
-                                    <td><button className="btn btn-danger" onClick={() => handleDelete(user)}>Delete</button></td>
-                                </tr>
-                            )}	
+                                {users && users.map(user =>
+                                    <tr key={user.id}>
+                                        <td>{user.id}</td>
+                                        <td>{user.firstName}</td>
+                                        <td>{user.lastName}</td>
+                                        <td>{user.username}</td>
+                                        <td><Link className="btn btn-primary" to={`/users/edit/${user.id}`}>Edit</Link></td>
+                                        <td><button className="btn btn-danger" onClick={() => handleDelete(user)}>Delete</button></td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -63,4 +63,3 @@ const ListUsers = () => {
         </div>
     );
 }
-export default ListUsers;

@@ -1,11 +1,11 @@
 import {Buffer} from 'buffer';
 import config from '../config.json';
-import { httpService } from '../services/http.service';
+import { HttpService } from '../services';
 
 const url = config.API_URL + 'Auth';
 
 const login = (credentials) => {
-    return httpService.post(url, credentials);
+    return HttpService.post(url, credentials);
 }
 
 const logout = () => {
@@ -29,7 +29,7 @@ const isLoggedIn = () => {
     return false;
 };
 
-export const authService = {
+export const AuthService = {
     login,
     logout,
     isLoggedIn
