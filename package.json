@@ -2,7 +2,7 @@
   "name": "crud-react-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://BtCellNet18.github.io/crud-react-client/",
+  "homepage": "https://BtCellNet18.github.io/crud-react-client",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
